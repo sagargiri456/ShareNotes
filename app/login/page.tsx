@@ -33,7 +33,7 @@ export default function LoginPage() {
       // Store token securely (can use cookies in production)
       localStorage.setItem('token', data.token);
       router.push('/upload');
-    } catch (err) {
+    } catch (_err) {
       setErrorMsg('Something went wrong. Please try again.');
     }
   };
@@ -86,7 +86,7 @@ export default function LoginPage() {
         </button>
 
         <p className="text-sm text-center text-gray-600">
-          Don’t have an account?{' '}
+          Don&apos;t have an account?{' '}
           <a href="/signup" className="text-blue-600 underline hover:text-blue-800">
             Sign up
           </a>

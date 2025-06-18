@@ -10,7 +10,7 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
     });
 
     return NextResponse.redirect(new URL('/admin', req.url));
-  } catch (error) {
+  } catch (_error) {
     return NextResponse.json({ error: 'Note not found or already deleted.' }, { status: 404 });
   }
 }

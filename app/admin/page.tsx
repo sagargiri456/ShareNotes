@@ -1,9 +1,21 @@
 import { prisma } from '@/lib/prisma';
-import { getUserIdFromToken } from '@/lib/auth';
 import { cookies } from 'next/headers';
 import jwt from 'jsonwebtoken';
 import { redirect } from 'next/navigation';
-import { Key, ReactElement, JSXElementConstructor, ReactNode, ReactPortal } from 'react';
+
+interface Note {
+  id: string;
+  title: string;
+  subject: string;
+  semester: string;
+  branch: string;
+  year: string;
+  author: {
+    name: string;
+    email: string;
+  };
+  fileUrl?: string;
+}
 
 export default async function AdminDashboard() {
   const token = (await cookies()).get('token')?.value;
@@ -13,7 +25,7 @@ export default async function AdminDashboard() {
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET!) as { email: string };
     email = decoded.email;
-  } catch (err) {
+  } catch (_err) {
     return redirect('/');
   }
 
@@ -30,7 +42,7 @@ export default async function AdminDashboard() {
     <div className="max-w-4xl mx-auto mt-10">
       <h1 className="text-3xl font-bold mb-6">🛠️ Admin Panel</h1>
 
-      {notes.map((note: { id: Key | null | undefined; title: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; subject: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; semester: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; branch: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; year: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; author: { name: any; email: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; }; fileUrl: string | undefined; }) => (
+      {notes.map((note: Note) => (
         <form
           key={note.id}
           action={`/admin/delete-note/${note.id}`}

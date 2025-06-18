@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 
 const JWT_SECRET = process.env.JWT_SECRET!;
 
-export async function getUserIdFromToken(headers: Headers): Promise<string | null> {
+export async function getUserIdFromToken(_headers: Headers): Promise<string | null> {
   try {
     const cookieStore = cookies();
     const token = (await cookieStore).get('token')?.value;
@@ -12,7 +12,7 @@ export async function getUserIdFromToken(headers: Headers): Promise<string | nul
 
     const decoded = jwt.verify(token, JWT_SECRET) as { userId: string };
     return decoded.userId;
-  } catch (err) {
+  } catch (_err) {
     return null;
   }
 }

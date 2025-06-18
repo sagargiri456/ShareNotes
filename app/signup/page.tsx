@@ -31,7 +31,7 @@ export default function SignupPage() {
 
       localStorage.setItem('token', data.token);
       router.push('/upload');
-    } catch (err) {
+    } catch (_err) {
       setErrorMsg('Something went wrong. Please try again.');
     }
   };

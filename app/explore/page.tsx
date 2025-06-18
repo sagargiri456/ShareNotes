@@ -1,6 +1,4 @@
 import { prisma } from '@/lib/prisma';
-import { Key, ReactElement, JSXElementConstructor, ReactNode, ReactPortal } from 'react';
-import { redirect } from 'next/navigation';
 
 interface Props {
     searchParams: {
@@ -11,6 +9,19 @@ interface Props {
       title?: string;
     };
   }
+
+interface Note {
+  id: string;
+  title: string;
+  subject: string;
+  semester: string;
+  branch: string;
+  year: string;
+  author: {
+    name: string;
+  };
+  fileUrl?: string;
+}
 
 export default async function ExploreNotesPage({ searchParams }: Props) {
   const { subject, semester, branch, year, title } = searchParams;
@@ -45,7 +56,7 @@ export default async function ExploreNotesPage({ searchParams }: Props) {
       {notes.length === 0 ? (
         <p className="text-gray-500">No notes found for the selected filters.</p>
       ) : (
-        notes.map((note: { id: Key | null | undefined; title: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; subject: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; semester: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; branch: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; year: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; author: { name: any; }; fileUrl: string | undefined; }) => (
+        notes.map((note: Note) => (
           <div key={note.id} className="border p-4 rounded shadow mb-4">
             <h2 className="font-bold text-lg">{note.title}</h2>
             <p className="text-sm text-gray-600">

@@ -1,7 +1,5 @@
 'use client';
 
-import { UploadButton } from "@uploadthing/react";
-import type { OurFileRouter } from "@/lib/uploadthing";
 import { useState } from "react";
 import NoteUploader from "@/components/NoteUploader";
 import { useRouter } from "next/navigation";

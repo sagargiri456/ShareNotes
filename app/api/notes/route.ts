@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { getUserIdFromToken } from "@/lib/auth";
 
 export async function POST(req: Request) {
   try {
@@ -13,9 +12,6 @@ export async function POST(req: Request) {
 
     const { title, subject, semester, branch, year, fileUrl } = await req.json();
     console.log(title, subject, semester, branch, year, fileUrl);
-    if (!title || !subject || !semester || !branch || !year || !fileUrl) {
-      return NextResponse.json({ error: "Missing fields" }, { status: 400 });
-    }
     if (!title || !subject || !semester || !branch || !year || !fileUrl) {
       return NextResponse.json({ error: "Missing fields" }, { status: 400 });
     }
