@@ -1,13 +1,13 @@
 import { prisma } from '@/lib/prisma';
 
 interface Props {
-    searchParams: {
+    searchParams: Promise<{
       subject?: string;
       semester?: string;
       branch?: string;
       year?: string;
       title?: string;
-    };
+    }>;
   }
 
 interface Note {
@@ -24,7 +24,7 @@ interface Note {
 }
 
 export default async function ExploreNotesPage({ searchParams }: Props) {
-  const { subject, semester, branch, year, title } = searchParams;
+  const { subject, semester, branch, year, title } = await searchParams;
 
   const notes = await prisma.note.findMany({
     where: {

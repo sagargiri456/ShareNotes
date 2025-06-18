@@ -16,7 +16,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Missing fields" }, { status: 400 });
     }
     console.log("reached till prisma creation");
-    const note = await prisma.Note.create({
+    const note = await prisma.note.create({
       data: {
         title,
         subject,
