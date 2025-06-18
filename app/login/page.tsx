@@ -44,12 +44,12 @@ export default function LoginPage() {
         onSubmit={handleSubmit}
         className="bg-white shadow-md rounded-xl p-8 w-full max-w-md space-y-6"
       >
-        <h2 className="text-2xl font-bold text-center">Login to Your Account</h2>
+        <h2 className="text-2xl font-bold text-black text-center">Login to Your Account</h2>
 
         {errorMsg && <p className="text-red-600 text-center text-sm">{errorMsg}</p>}
 
         <div>
-          <label htmlFor="email" className="block text-sm font-medium mb-1">
+          <label htmlFor="email" className="block text-sm text-black font-medium mb-1">
             Email
           </label>
           <input
@@ -64,7 +64,7 @@ export default function LoginPage() {
         </div>
 
         <div>
-          <label htmlFor="password" className="block text-sm font-medium mb-1">
+          <label htmlFor="password" className="block text-black text-sm font-medium mb-1">
             Password
           </label>
           <input
