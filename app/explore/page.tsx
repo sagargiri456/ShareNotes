@@ -1,3 +1,6 @@
+import CommentButton from '@/components/CommentButton';
+import LikeButton from '@/components/LikeButton';
+import PdfPreviewSlider from '@/components/PdfPreviewSlider';
 import { prisma } from '@/lib/prisma';
 
 interface Props {
@@ -53,22 +56,31 @@ export default async function ExploreNotesPage({ searchParams }: Props) {
       </form>
 
       {/* Results */}
-      {notes.length === 0 ? (
-        <p className="text-gray-500">No notes found for the selected filters.</p>
-      ) : (
-        notes.map((note: Note) => (
-          <div key={note.id} className="border p-4 rounded shadow mb-4">
-            <h2 className="font-bold text-lg">{note.title}</h2>
-            <p className="text-sm text-gray-600">
-              {note.subject} | Sem: {note.semester} | Branch: {note.branch} | Year: {note.year}
-            </p>
-            <p className="text-xs text-gray-500">By: {note.author?.name || 'Anonymous'}</p>
-            <a href={note.fileUrl} target="_blank" className="inline-block mt-2 text-blue-600 underline">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+  {notes.map((note) => (
+    <div key={note.id} className="bg-white shadow-md rounded-lg p-4 relative">
+      <h2 className="text-xl text-black font-semibold mb-2">{note.title}</h2>
+
+      {/* PDF Preview Slider Here */}
+      <PdfPreviewSlider fileUrl={note.fileUrl!} />
+
+      <p className="text-sm text-gray-600">
+        {note.subject} | Sem: {note.semester} | Branch: {note.branch} | Year: {note.year}
+      </p>
+      <p className="text-xs text-gray-500">By: {note.author?.name || "Anonymous"}</p>
+      <a href={note.fileUrl} target="_blank" className="inline-block mt-2 text-blue-600 underline">
               View / Download
-            </a>
-          </div>
-        ))
-      )}
+      </a>
+      
+
+      {/* Like & Comment Section */}
+      <div className="flex items-center gap-4 mt-4">
+        <LikeButton noteId={note.id} />
+        <CommentButton noteId={note.id} />
+      </div>
+    </div>
+  ))}
+</div>
     </div>
   );
 }
