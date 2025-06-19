@@ -7,9 +7,10 @@ interface DecodedToken {
   userId: string;
 }
 // ✅ GET Comments (sorted by latest first)
-export async function GET(req: Request, { params }: { params: { noteId: string } }) {
+export async function GET(req: Request, { params }: { params: Promise<{ noteId: string }> }) {
+  const { noteId } = await params;
   const comments = await prisma.comment.findMany({
-    where: { noteId: params.noteId },
+    where: { noteId },
     orderBy: { createdAt: 'desc' },
     include: {
       user: { select: { name: true } }, // agar user table link ho
@@ -19,7 +20,8 @@ export async function GET(req: Request, { params }: { params: { noteId: string }
   return NextResponse.json(comments);
 }
 
-export async function POST(req: Request, { params }: { params: { noteId: string } }) {
+export async function POST(req: Request, { params }: { params: Promise<{ noteId: string }> }) {
+  const { noteId } = await params;
   const body = await req.json();
   const { content } = body;
 
@@ -41,7 +43,7 @@ export async function POST(req: Request, { params }: { params: { noteId: string 
   const comment = await prisma.comment.create({
     data: {
       content,
-      noteId: params.noteId,
+      noteId,
       userId,
     },
   });
@@ -52,7 +54,7 @@ function verifyToken(token: string): DecodedToken | null {
   try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET || 'fallback-secret') as DecodedToken;
       return decoded;
-  } catch (error) {
+  } catch (_error) {
       return null;
   }
 }

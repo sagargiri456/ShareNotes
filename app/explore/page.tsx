@@ -13,19 +13,6 @@ interface Props {
     }>;
   }
 
-interface Note {
-  id: string;
-  title: string;
-  subject: string;
-  semester: string;
-  branch: string;
-  year: string;
-  author: {
-    name: string;
-  };
-  fileUrl?: string;
-}
-
 export default async function ExploreNotesPage({ searchParams }: Props) {
   const { subject, semester, branch, year, title } = await searchParams;
 

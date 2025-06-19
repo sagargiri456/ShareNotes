@@ -7,7 +7,8 @@ interface DecodedToken {
   userId: string;
 }
 
-export async function POST(req: Request, { params }: { params: { noteId: string } }) {
+export async function POST(req: Request, { params }: { params: Promise<{ noteId: string }> }) {
+  const { noteId } = await params;
   const cookieStore = cookies();
   const token = (await cookieStore).get('token')?.value;
   
@@ -23,7 +24,6 @@ export async function POST(req: Request, { params }: { params: { noteId: string 
     }
   
     const userId = decoded.userId;
-    const noteId = params.noteId;
 if (!noteId || typeof noteId !== 'string') {
       return NextResponse.json({ error: 'Invalid noteId' }, { status: 400 });
     }
@@ -42,7 +42,7 @@ function verifyToken(token: string): DecodedToken | null {
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET || 'fallback-secret') as DecodedToken;
         return decoded;
-    } catch (error) {
+    } catch (_error) {
         return null;
     }
 }

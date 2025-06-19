@@ -5,6 +5,7 @@ import { Document, Page, pdfjs } from 'react-pdf';
 import { useState } from 'react';
 import Slider from "react-slick";
 
+
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
 interface Props {
@@ -37,7 +38,7 @@ export default function PdfPreviewSlider({ fileUrl }: Props) {
           setNumPages(numPages);
           setLoading(false);
         }}
-        onLoadError={(err) => {
+        onLoadError={(_err) => {
           setError("Failed to load PDF.");
           setLoading(false);
         }}
