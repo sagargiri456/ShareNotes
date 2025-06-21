@@ -15,7 +15,7 @@ export async function POST(req: Request) {
     if (!title || !subject || !semester || !branch || !year || !fileUrl) {
       return NextResponse.json({ error: "Missing fields" }, { status: 400 });
     }
-    console.log("reached till prisma creation");
+    
     const note = await prisma.note.create({
       data: {
         title,

@@ -3,20 +3,33 @@ import { prisma } from '@/lib/prisma';
 
 export async function POST(
   req: NextRequest,
-  {params}: { params: Promise<{ id: string }> }
+  context: { params: { id: string } }
 ) {
-  const { id: noteId } = await params;
-
   try {
-    await prisma.note.delete({
-      where: { id: noteId },
+    const { id } = context.params;
+    console.log("Deleting Note with ID:", id);
+
+    // Check if note exists
+    const note = await prisma.note.findUnique({
+      where: { id },
     });
 
-    return NextResponse.redirect(new URL('/admin', req.url));
-  } catch (_error) {
+    if (!note) {
+      console.warn("Note not found in DB.");
+      return NextResponse.json({ error: "Note not found" }, { status: 404 });
+    }
+
+    // Delete the note
+    await prisma.note.delete({
+      where: { id },
+    });
+
+    return NextResponse.json({ message: "Note deleted successfully" });
+  } catch (error) {
+    console.error("❌ Deletion failed with error:", error); // 🔍 See full error here
     return NextResponse.json(
-      { error: 'Note not found or already deleted.' },
-      { status: 404 }
+      { error: "Something went wrong." },
+      { status: 500 }
     );
   }
 }

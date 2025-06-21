@@ -5,7 +5,7 @@ const f = createUploadthing();
 export const ourFileRouter = {
   noteUpload: f({ pdf: { maxFileSize: "8MB" } })
     .onUploadComplete(async ({ file }) => {
-      console.log("Upload complete", file.ufsUrl);
+      
       // You can log or process the file here
     }),
 } satisfies FileRouter;

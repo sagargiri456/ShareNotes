@@ -39,7 +39,7 @@ export async function POST(req: Request, { params }: { params: Promise<{ noteId:
 
   const userId = decoded.userId;
   if (!content) return NextResponse.json({ error: "Comment cannot be empty." }, { status: 400 });
-  console.log("started pushing comment to the database.")
+  
   const comment = await prisma.comment.create({
     data: {
       content,

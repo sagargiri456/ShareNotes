@@ -20,17 +20,18 @@ export function NoteCard({ note }: { note: Note }) {
       const res = await fetch(`/api/admin/delete-note/${noteId}`, {
         method: 'POST',
       });
-
+  
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Failed to delete');
-
+  
       alert('Note deleted successfully');
-      window.location.reload();
+      window.location.reload(); // to refresh list
     } catch (err) {
       console.error(err);
       alert('Error deleting note');
     }
   };
+  
 
   return (
     <div className="border p-4 rounded shadow relative group">

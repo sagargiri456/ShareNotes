@@ -35,24 +35,24 @@ model Note {
   authorId  String
   author    User      @relation("UserNotes", fields: [authorId], references: [id])
   createdAt DateTime  @default(now())
-  likes     Like[]
-  comments  Comment[]
+  likes     Like[]   
+  comments  Comment[] 
 }
 
 model Like {
   id     String @id @default(uuid())
-  note   Note   @relation(fields: [noteId], references: [id])
+  note   Note   @relation(fields: [noteId], references: [id], onDelete:Cascade)
   noteId String
   userId String
-  user   User   @relation(fields: [userId], references: [id], name: "UserLikes")
+  user   User   @relation(fields: [userId], references: [id], name: "UserLikes",onDelete:Cascade)
 }
 
 model Comment {
   id        String   @id @default(uuid())
   content   String
-  note      Note     @relation(fields: [noteId], references: [id])
+  note      Note     @relation(fields: [noteId], references: [id],onDelete: Cascade)
   noteId    String
   userId    String
-  user      User     @relation(fields: [userId], references: [id])
+  user      User     @relation(fields: [userId], references: [id],onDelete: Cascade)
   createdAt DateTime @default(now())
 }

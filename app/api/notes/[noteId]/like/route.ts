@@ -14,13 +14,13 @@ export async function POST(req: Request, { params }: { params: Promise<{ noteId:
   
     if (!token) {
       return NextResponse.json({ error: 'Missing token' }, { status: 401 });
-      console.log("missing token");
+      
     }
     
     const decoded = verifyToken(token);
     if (!decoded) {
       return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
-      console.log("invalid token");
+      
     }
   
     const userId = decoded.userId;

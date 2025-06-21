@@ -31,7 +31,7 @@ export default async function ExploreNotesPage({ searchParams }: Props) {
   return (
     <div className="max-w-4xl mx-auto mt-10">
      <h1 className="text-3xl font-bold font-poppins text-gray-800 mb-4 tracking-tight flex items-center gap-2">
-  <span className="text-sm"><Image width={50} height={50} src="explore_logo.png" alt="explore_logo" /></span>
+  <span className="text-sm"><Image width={50} height={50} src="/explore_logo.png" alt="explore_logo" /></span>
   Explore Notes
 </h1>
 

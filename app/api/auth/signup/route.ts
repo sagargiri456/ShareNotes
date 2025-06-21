@@ -4,7 +4,7 @@ import { prisma } from '@/lib/prisma';
 
 export async function POST(req: Request) {
   const {  email, password, name,} = await req.json();
-  console.log("Received:", { name, email, password });
+  
 
   const existingUser = await prisma.user.findUnique({ where: { email } });
   if (existingUser) {
