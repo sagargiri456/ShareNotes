@@ -32,9 +32,10 @@ export default function Navbar() {
   return (
     <nav className="bg-white shadow-sm border-b">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16">
+        <div className="flex justify-between h-17">
           <div className="flex items-center">
-            <Link href="/" className="text-xl font-semibold text-gray-900">
+            <Link href="/" className="text-xl flex justify-center items-center font-semibold text-gray-900">
+            <span><img style={{width:'5rem', height:'5rem'}} src="sharenotes.png" alt="main_logo" /></span>
               Share<span className='text-red-500'>Notes</span>
             </Link>
           </div>

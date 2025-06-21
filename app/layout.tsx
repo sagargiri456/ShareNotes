@@ -1,10 +1,25 @@
+// app/layout.tsx
+
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "@uploadthing/react/styles.css"
+import "@uploadthing/react/styles.css";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import { Inter, Poppins } from 'next/font/google';
+
+// Fonts
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-inter',
+});
+
+const poppins = Poppins({
+  subsets: ['latin'],
+  weight: ['400', '600'],
+  display: 'swap',
+  variable: '--font-poppins',
+});
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,18 +34,21 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "ShareNotes",
   description: "📚 Notes Sharing Platform – Simplify, Share, and Succeed",
+  icons:{
+    icon:"/favicon2.png", 
+  }
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased text-black`}
-      >
+    <html lang="en"
+      className={`${inter.variable} ${poppins.variable} ${geistSans.variable} ${geistMono.variable}`}
+    >
+      <body className="bg-[#f9fafb] font-poppins antialiased text-gray-900">
         <Navbar />
         {children}
       </body>
