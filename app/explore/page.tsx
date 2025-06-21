@@ -1,6 +1,5 @@
 import CommentButton from '@/components/CommentButton';
 import LikeButton from '@/components/LikeButton';
-import PdfPreviewSlider from '@/components/PdfPreviewSlider';
 import { prisma } from '@/lib/prisma';
 
 interface Props {
@@ -49,7 +48,11 @@ export default async function ExploreNotesPage({ searchParams }: Props) {
       <h2 className="text-xl text-black font-semibold mb-2">{note.title}</h2>
 
       {/* PDF Preview Slider Here */}
-      <PdfPreviewSlider fileUrl={note.fileUrl!} />
+      <iframe
+  src={`https://docs.google.com/gview?url=${encodeURIComponent(note.fileUrl)}&embedded=true`}
+  style={{ width: '100%', height: '400px' }}
+  frameBorder="0"
+/>
 
       <p className="text-sm text-gray-600">
         {note.subject} | Sem: {note.semester} | Branch: {note.branch} | Year: {note.year}

@@ -2,7 +2,7 @@
 'use client';
 
 import { Document, Page, pdfjs } from 'react-pdf';
-import { useState } from 'react';
+import {  useState } from 'react';
 import Slider from "react-slick";
 
 
@@ -26,7 +26,7 @@ export default function PdfPreviewSlider({ fileUrl }: Props) {
     slidesToScroll: 1,
     autoplay: true,
   };
-
+  
   return (
     <div className="mt-3 border rounded overflow-hidden bg-white p-2">
       {loading && <p className="text-sm text-gray-500">Loading preview...</p>}

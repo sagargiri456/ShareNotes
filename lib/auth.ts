@@ -1,5 +1,6 @@
 import { cookies } from 'next/headers';
 import jwt from 'jsonwebtoken';
+import { prisma } from './prisma';
 
 const JWT_SECRET = process.env.JWT_SECRET!;
 
@@ -11,6 +12,9 @@ export async function getUserIdFromToken(_headers: Headers): Promise<string | nu
     if (!token) return null;
 
     const decoded = jwt.verify(token, JWT_SECRET) as { userId: string };
+    //as { userId: string }
+    // TypeScript ka part hai. Ye batata hai ki verify karne ke baad decoded object mein userId naam ka
+    //  ek field hoga jo ek string type ka hai.
     return decoded.userId;
   } catch (_err) {
     return null;
@@ -18,5 +22,15 @@ export async function getUserIdFromToken(_headers: Headers): Promise<string | nu
 }
 export function isAdmin(email: string | null | undefined): boolean {
     return email === process.env.ADMIN_EMAIL;
+}
+export async function getCurrentUser() {
+  
+  const token = (await cookies()).get('token')?.value;
+  if (!token) return null;
+  const decoded = jwt.verify(token, JWT_SECRET) as { userId: string };
+  
+  const user = await prisma.user.findFirst({ where: { id: decoded.userId } });
+  console.log(user)
+  return user;
 }
   
