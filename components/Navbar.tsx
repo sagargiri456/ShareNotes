@@ -1,4 +1,5 @@
 'use client'
+import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
@@ -35,7 +36,7 @@ export default function Navbar() {
         <div className="flex justify-between h-17">
           <div className="flex items-center">
             <Link href="/" className="text-xl flex justify-center items-center font-semibold text-gray-900">
-            <span><img style={{width:'5rem', height:'5rem'}} src="sharenotes.png" alt="main_logo" /></span>
+            <span><Image width={80} height={80} src="/sharenotes.png" alt="main_logo" /></span>
               Share<span className='text-red-500'>Notes</span>
             </Link>
           </div>

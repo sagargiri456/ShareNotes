@@ -3,7 +3,7 @@ import { prisma } from '@/lib/prisma';
 
 export async function POST(
   req: NextRequest,
-  { params }: { params: Promise<{ id: string }> } //causing issue related to promise if were not using promise
+  {params}: { params: Promise<{ id: string }> }
 ) {
   const { id: noteId } = await params;
 
