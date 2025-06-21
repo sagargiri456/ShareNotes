@@ -45,7 +45,7 @@ export default async function AdminDashboard() {
       {notes.map((note: Note) => (
         <form
           key={note.id}
-          action={`/admin/delete-note/${note.id}`}
+          action={`/api/admin/delete-note/${note.id}`}
           method="post"
           className="border p-4 rounded mb-4 shadow"
         >

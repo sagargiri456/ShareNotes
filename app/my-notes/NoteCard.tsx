@@ -13,7 +13,7 @@ interface Note {
 }
 
 export function NoteCard({ note }: { note: Note }) {
-  const [, startTransition] = useTransition(); // ✅ fixed
+  const [, startTransition] = useTransition(); 
 
   const deleteNote = async (noteId: string) => {
     try {
