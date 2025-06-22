@@ -51,7 +51,9 @@ export default function RootLayout({
     <html lang="en"
       className={`${inter.variable} ${poppins.variable} ${geistSans.variable} ${geistMono.variable}`}
     >
-      <head />
+      <head>
+        <meta name="google-site-verification" content="BcGehRZBgLX5V-kjB88HSz4AthSCJWnfZc159LAP1gc" />
+      </head>
       <body className="bg-[#f9fafb] font-poppins antialiased text-gray-900">
         <Navbar />
         {children}
