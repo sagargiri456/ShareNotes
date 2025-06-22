@@ -36,7 +36,10 @@ export const metadata: Metadata = {
   description: "📚 Notes Sharing Platform – Simplify, Share, and Succeed",
   icons:{
     icon:"/favicon2.png", 
-  }
+  },
+  verification: {
+    google: 'BcGehRZBgLX5V-kjB88HSz4AthSCJWnfZc159LAP1gc',
+  },
 };
 
 export default function RootLayout({
@@ -48,6 +51,7 @@ export default function RootLayout({
     <html lang="en"
       className={`${inter.variable} ${poppins.variable} ${geistSans.variable} ${geistMono.variable}`}
     >
+      <head />
       <body className="bg-[#f9fafb] font-poppins antialiased text-gray-900">
         <Navbar />
         {children}
