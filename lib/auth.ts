@@ -30,7 +30,10 @@ export async function getCurrentUser() {
   const decoded = jwt.verify(token, JWT_SECRET) as { userId: string };
   
   const user = await prisma.user.findFirst({ where: { id: decoded.userId } });
-  console.log(user)
+  if (user) {
+    // Log only non-sensitive info
+    console.log({ id: user.id, name: user.name, email: user.email, createdAt: user.createdAt });
+  }
   return user;
 }
   

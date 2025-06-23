@@ -13,7 +13,6 @@ interface User {
 export default function Navbar() {
   const [user, setUser] = useState<User | null>(null);
   const [showLogout, setShowLogout] = useState<boolean>(false);
-
   useEffect(() => {
     async function fetchUser() {
       const res = await fetch('/api/me');
@@ -28,7 +27,14 @@ export default function Navbar() {
   const toggleLogout = () => {
     setShowLogout(prev => !prev);
   }
-  
+  const handleLogout = async () => {
+    await fetch('/api/auth/logout', {
+      // method: 'POST',
+      // credentials: 'include',
+    });
+    console.log("reached till router.refresh")
+    window.location.reload(); // re-renders navbar
+  };
   
   return (
     <nav className="bg-white shadow-sm border-b">
@@ -36,7 +42,7 @@ export default function Navbar() {
         <div className="flex justify-between h-17">
           <div className="flex items-center">
             <Link href="/" className="text-xl flex justify-center items-center font-semibold text-gray-900">
-            <span><Image width={80} height={80} src="/sharenotes.png" alt="main_logo" /></span>
+            <span><Image width={70} height={70} src="/sharenotes.png" alt="main_logo" /></span>
               Share<span className='text-red-500'>Notes</span>
             </Link>
           </div>
@@ -62,7 +68,7 @@ export default function Navbar() {
 
                   {showLogout && (
                     <div className="absolute right-2 mt-10 bg-white border rounded shadow p-2 z-10">
-                     <Link href="/api/auth/logout" className="text-red-600 text-sm">Logout</Link>
+                     <button onClick={handleLogout} className="text-red-600 text-sm">Logout</button>
                   </div>
                   )}
                 </div>

@@ -34,9 +34,6 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "ShareNotes",
   description: "📚 Notes Sharing Platform – Simplify, Share, and Succeed",
-  icons:{
-    icon:"/favicon2.png", 
-  },
   verification: {
     google: 'BcGehRZBgLX5V-kjB88HSz4AthSCJWnfZc159LAP1gc',
   },

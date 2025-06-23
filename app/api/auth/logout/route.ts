@@ -11,8 +11,6 @@ export async function POST() {
   return res;
 }
 export async function GET() {
-  
-
   const res = NextResponse.redirect(new URL('/', process.env.NEXT_PUBLIC_BASE_URL));
   res.cookies.set('token', '', { maxAge: 0 });
 

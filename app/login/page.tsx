@@ -1,10 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 
 export default function LoginPage() {
-  const router = useRouter();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -32,7 +30,8 @@ export default function LoginPage() {
 
       // Store token securely (can use cookies in production)
       localStorage.setItem('token', data.token);
-      router.push('/upload');
+      // router.push('/explore');
+      window.location.reload();
     } catch (_err) {
       setErrorMsg('Something went wrong. Please try again.');
     }
