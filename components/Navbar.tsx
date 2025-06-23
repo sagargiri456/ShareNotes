@@ -61,19 +61,32 @@ export default function Navbar() {
                 <div className="flex flex-col items-end">
                   <button
                     onClick={toggleLogout}
-                    className="bg-gray-100 px-3 py-1 rounded-full text-sm hover:bg-gray-200"
+                    className="px-4 py-1 rounded-full text-sm font-semibold shadow-lg transition-all duration-200 bg-gradient-to-r from-green-400/60 to-green-600/60 backdrop-blur-md border border-white/30 text-green-900 hover:from-green-500/80 hover:to-green-700/80 hover:scale-105"
+                    style={{ boxShadow: '0 4px 30px rgba(34,197,94,0.2)', textShadow: '0 1px 4px rgba(0,0,0,0.12)' }}
                   >
                     {user.name}
                   </button>
 
                   {showLogout && (
-                    <div className="absolute right-2 mt-10 bg-white border rounded shadow p-2 z-10">
-                     <button onClick={handleLogout} className="text-red-600 text-sm">Logout</button>
-                  </div>
+                    <div className="absolute right-2 mt-10 bg-white/10 backdrop-blur-md border border-white/30 rounded shadow p-2 z-10">
+                      <button
+                        onClick={handleLogout}
+                        className="w-full px-4 py-2 rounded-lg font-semibold bg-gradient-to-r from-red-400/60 to-red-600/60 text-red-900 shadow-lg backdrop-blur-md border border-white/30 hover:from-red-500/80 hover:to-red-700/80 hover:scale-105 transition-all duration-200"
+                        style={{ boxShadow: '0 4px 30px rgba(239,68,68,0.2)', textShadow: '0 1px 4px rgba(0,0,0,0.12)' }}
+                      >
+                        Logout
+                      </button>
+                    </div>
                   )}
                 </div>
               ) : (
-                <Link href="/login" className="text-blue-600">Login</Link>
+                <Link
+                  href="/login"
+                  className="px-4 py-2 rounded-full font-semibold shadow-lg bg-gradient-to-r from-green-400/60 to-green-600/60 text-white backdrop-blur-md border border-white/30 hover:from-green-500/80 hover:to-green-700/80 hover:scale-105 transition-all duration-200"
+                  style={{ boxShadow: '0 4px 30px rgba(34,197,94,0.2)' }}
+                >
+                  Login
+                </Link>
               )}
             </div>
           </div>

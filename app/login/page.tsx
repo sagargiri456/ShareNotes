@@ -31,7 +31,9 @@ export default function LoginPage() {
       // Store token securely (can use cookies in production)
       localStorage.setItem('token', data.token);
       // router.push('/explore');
-      window.location.reload();
+      
+      window.location.href = '/explore';
+
     } catch (_err) {
       setErrorMsg('Something went wrong. Please try again.');
     }
