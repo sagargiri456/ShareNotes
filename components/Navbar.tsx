@@ -1,7 +1,7 @@
 'use client'
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface User {
   id: string;
@@ -13,6 +13,8 @@ interface User {
 export default function Navbar() {
   const [user, setUser] = useState<User | null>(null);
   const [showLogout, setShowLogout] = useState<boolean>(false);
+  const userMenuRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     async function fetchUser() {
       const res = await fetch('/api/me');
@@ -23,6 +25,19 @@ export default function Navbar() {
     }
     fetchUser();
   }, []);
+
+  useEffect(() => {
+    if (!showLogout) return;
+    function handleClickOutside(event: MouseEvent) {
+      if (userMenuRef.current && !userMenuRef.current.contains(event.target as Node)) {
+        setShowLogout(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showLogout]);
 
   const toggleLogout = () => {
     setShowLogout(prev => !prev);
@@ -58,7 +73,7 @@ export default function Navbar() {
             </Link>
             <div className="relative">
               {user ? (
-                <div className="flex flex-col items-end">
+                <div className="flex flex-col items-end" ref={userMenuRef}>
                   <button
                     onClick={toggleLogout}
                     className="px-4 py-1 rounded-full text-sm font-semibold shadow-lg transition-all duration-200 bg-gradient-to-r from-green-400/60 to-green-600/60 backdrop-blur-md border border-white/30 text-green-900 hover:from-green-500/80 hover:to-green-700/80 hover:scale-105"
