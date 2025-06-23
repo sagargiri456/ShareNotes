@@ -36,6 +36,29 @@
 - **Deployment**: Vercel
 
 ---
+## Setup Project
+1. Clone the Repository
 
-## 🏗️ Project Structure
+git clone https://github.com/yourusername/sharenotes.git
+cd sharenotes
 
+2. Install Dependencies
+npm install
+
+4. Configure Environment Variables
+Create a .env file in the root directory and add the following:
+
+env
+
+DATABASE_URL=your_postgres_url
+JWT_SECRET=your_jwt_secret
+NEXT_PUBLIC_BASE_URL=http://localhost:3000
+📝 Replace the values with your actual credentials.
+
+4. Run Prisma Migrations & Generate Client
+npx prisma migrate dev --name init
+
+5. Start the Development Server
+npm run dev
+
+Your app will now be running at http://localhost:3000 🎉
