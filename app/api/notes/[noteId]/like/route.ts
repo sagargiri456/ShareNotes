@@ -6,6 +6,25 @@ import jwt from 'jsonwebtoken';
 interface DecodedToken {
   userId: string;
 }
+export async function GET(req: Request, { params }: { params: Promise<{ noteId: string }> }) {
+  const { noteId } = await params;
+  const cookieStore = cookies();
+  const token = (await cookieStore).get('token')?.value;
+  if (!token) {
+    return NextResponse.json({ error: 'Missing token' }, { status: 401 });
+  }
+  const decoded = verifyToken(token);
+  if (!decoded) {
+      return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
+      
+  }
+  const userId = decoded.userId;
+  const count = await prisma.like.count({ where: { noteId } });
+  // const liked = await prisma.like.findFirst({ where: { noteId, userId } }); This is wrong because
+  //it's returning a object prisma returns a object right.
+  const liked = !!(await prisma.like.findFirst({where:{noteId,userId}}))
+  return NextResponse.json({ count,liked });
+}
 
 export async function POST(req: Request, { params }: { params: Promise<{ noteId: string }> }) {
   const { noteId } = await params;
