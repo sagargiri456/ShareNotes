@@ -3,7 +3,7 @@ import { createUploadthing, type FileRouter } from "uploadthing/next";
 const f = createUploadthing();
 
 export const ourFileRouter = {
-  noteUpload: f({ pdf: { maxFileSize: "100MB" } })
+  noteUpload: f({ pdf: { maxFileSize: "32MB" } })
     .onUploadComplete(async ({ file: _file }) => {
       
       // You can log or process the file here
