@@ -53,8 +53,22 @@ export default function Chatbot() {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 w-80 max-w-xs z-50 bg-gray-100 rounded-xl shadow-lg flex flex-col h-[32rem] border border-gray-300">
-      <div className="flex-1 overflow-y-auto space-y-4 p-4">
+    <div className="fixed bottom-6 right-6 w-80 max-w-xs z-50 rounded-xl shadow-lg flex flex-col h-[32rem] border border-gray-300"
+      style={{
+        background: 'linear-gradient(135deg, #a8ff78 0%, #78ffd6 100%)',
+        boxShadow: '0 8px 32px 0 rgba(34, 197, 94, 0.37)',
+      }}
+    >
+      <div className="p-4 flex items-center justify-center">
+        <span className="text-lg font-bold">
+          Hi, I am{' '}
+          <span>
+            <span className="text-black">FindNotes</span>
+            <span className="text-red-600">Bot</span>
+          </span>
+        </span>
+      </div>
+      <div className="flex-1 overflow-y-auto space-y-4 px-4">
         {messages.map((msg, index) => (
           <div key={index} className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
             <div className={`p-3 rounded-lg max-w-[80%] ${
@@ -84,8 +98,7 @@ export default function Chatbot() {
         )}
         <div ref={messagesEndRef} />
       </div>
-
-      <div className="flex items-center p-3 border-t bg-white">
+      <div className="flex items-center p-3 border-t bg-white" style={{ background: 'linear-gradient(135deg, #a8ff78 0%, #78ffd6 100%)' }}>
         <input
           type="text"
           value={input}
