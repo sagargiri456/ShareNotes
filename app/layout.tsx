@@ -6,6 +6,7 @@ import "@uploadthing/react/styles.css";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import { Inter, Poppins } from 'next/font/google';
+import Chatbot from "@/components/Chatbot";
 
 // Fonts
 const inter = Inter({
@@ -54,6 +55,7 @@ export default function RootLayout({
       <body className="bg-[#f9fafb] font-poppins antialiased text-gray-900">
         <Navbar />
         {children}
+        <Chatbot />
       </body>
     </html>
   );
