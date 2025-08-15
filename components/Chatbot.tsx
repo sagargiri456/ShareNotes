@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { Note } from '@prisma/client';
 
@@ -45,7 +44,7 @@ export default function Chatbot() {
         notes: data.notes || [],
       };
       setMessages(prev => [...prev, botMessage]);
-    } catch (error) {
+    } catch (_error) {
       const botError: Message = { text: 'Sorry, something went wrong. Please try again.', sender: 'bot' };
       setMessages(prev => [...prev, botError]);
     } finally {

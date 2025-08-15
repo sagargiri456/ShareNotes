@@ -33,8 +33,12 @@ export default function ForgotPasswordPage() {
 
       setMessage('OTP sent to your email.');
       setStep(2);
-    } catch (err: any) {
-      setError(err.message || 'Something went wrong. Please try again.');
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message || 'Something went wrong. Please try again.');
+      } else {
+        setError('Something went wrong. Please try again.');
+      }
     }
   };
 
@@ -57,8 +61,12 @@ export default function ForgotPasswordPage() {
 
       setMessage('OTP verified. You can now set a new password.');
       setStep(3);
-    } catch (err: any) {
-      setError(err.message || 'Something went wrong. Please try again.');
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message || 'Something went wrong. Please try again.');
+      } else {
+        setError('Something went wrong. Please try again.');
+      }
     }
   };
 
@@ -89,8 +97,12 @@ export default function ForgotPasswordPage() {
       router.push('/explore');
       
       setMessage('Password reset successfully! You are now logged in.');
-    } catch (err: any) {
-      setError(err.message || 'Something went wrong. Please try again.');
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message || 'Something went wrong. Please try again.');
+      } else {
+        setError('Something went wrong. Please try again.');
+      }
     }
   };
 
