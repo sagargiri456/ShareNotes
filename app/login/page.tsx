@@ -31,7 +31,7 @@ export default function LoginPage() {
       // Store token securely (can use cookies in production)
       localStorage.setItem('token', data.token);
       // router.push('/explore');
-      
+
       window.location.href = '/explore';
 
     } catch (_err) {
@@ -77,6 +77,11 @@ export default function LoginPage() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+          <div className="flex justify-end mt-1">
+            <a href="/forgotPassword" className="text-blue-600 hover:text-blue-800 text-sm">
+              Forgot Password?
+            </a>
+          </div>
         </div>
 
         <button
