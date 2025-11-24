@@ -14,16 +14,27 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(cuid())
+  id        String    @id @default(cuid())
   name      String
-  email     String   @unique
+  email     String    @unique
   password  String
-  notes     Note[]   @relation("UserNotes")
-  createdAt DateTime @default(now())
+  comments  Comment[]
+  likes     Like[]    @relation("UserLikes")
+  notes     Note[]    @relation("UserNotes")
+  createdAt DateTime  @default(now())
+  otp       Otp?
+}
+
+model Otp {
+  id        String   @id @default(uuid())
+  code      String
+  expiresAt DateTime
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String   @unique
 }
 
 model Note {
-  id        String   @id @default(cuid())
+  id        String    @id @default(cuid())
   title     String
   subject   String
   semester  String
@@ -31,6 +42,27 @@ model Note {
   year      String
   fileUrl   String
   authorId  String
-  author    User     @relation("UserNotes", fields: [authorId], references: [id])
+  author    User      @relation("UserNotes", fields: [authorId], references: [id])
+  createdAt DateTime  @default(now())
+  likes     Like[]   
+  comments  Comment[]
+  tags       String[]
+}
+
+model Like {
+  id     String @id @default(uuid())
+  note   Note   @relation(fields: [noteId], references: [id], onDelete:Cascade)
+  noteId String
+  userId String
+  user   User   @relation(fields: [userId], references: [id], name: "UserLikes",onDelete:Cascade)
+}
+
+model Comment {
+  id        String   @id @default(uuid())
+  content   String
+  note      Note     @relation(fields: [noteId], references: [id],onDelete: Cascade)
+  noteId    String
+  userId    String
+  user      User     @relation(fields: [userId], references: [id],onDelete: Cascade)
   createdAt DateTime @default(now())
 }

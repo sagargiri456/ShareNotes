@@ -1,10 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 
 export default function LoginPage() {
-  const router = useRouter();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -32,8 +30,11 @@ export default function LoginPage() {
 
       // Store token securely (can use cookies in production)
       localStorage.setItem('token', data.token);
-      router.push('/upload');
-    } catch (err) {
+      // router.push('/explore');
+
+      window.location.href = '/explore';
+
+    } catch (_err) {
       setErrorMsg('Something went wrong. Please try again.');
     }
   };
@@ -44,12 +45,12 @@ export default function LoginPage() {
         onSubmit={handleSubmit}
         className="bg-white shadow-md rounded-xl p-8 w-full max-w-md space-y-6"
       >
-        <h2 className="text-2xl font-bold text-center">Login to Your Account</h2>
+        <h2 className="text-2xl font-bold text-black text-center">Login to Your Account</h2>
 
         {errorMsg && <p className="text-red-600 text-center text-sm">{errorMsg}</p>}
 
         <div>
-          <label htmlFor="email" className="block text-sm font-medium mb-1">
+          <label htmlFor="email" className="block text-sm text-black font-medium mb-1">
             Email
           </label>
           <input
@@ -64,7 +65,7 @@ export default function LoginPage() {
         </div>
 
         <div>
-          <label htmlFor="password" className="block text-sm font-medium mb-1">
+          <label htmlFor="password" className="block text-black text-sm font-medium mb-1">
             Password
           </label>
           <input
@@ -76,6 +77,11 @@ export default function LoginPage() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+          <div className="flex justify-end mt-1">
+            <a href="/forgotPassword" className="text-blue-600 hover:text-blue-800 text-sm">
+              Forgot Password?
+            </a>
+          </div>
         </div>
 
         <button
@@ -86,7 +92,7 @@ export default function LoginPage() {
         </button>
 
         <p className="text-sm text-center text-gray-600">
-          Don’t have an account?{' '}
+          Don&apos;t have an account?{' '}
           <a href="/signup" className="text-blue-600 underline hover:text-blue-800">
             Sign up
           </a>

@@ -1,12 +1,11 @@
 import { createUploadthing, type FileRouter } from "uploadthing/next";
-import { getUserIdFromToken } from "@/lib/auth"; // This is imported but not used
 
 const f = createUploadthing();
 
 export const ourFileRouter = {
-  noteUpload: f({ pdf: { maxFileSize: "8MB" } })
-    .onUploadComplete(async ({ metadata, file }) => {
-      console.log("Upload complete", file.ufsUrl);
+  noteUpload: f({ pdf: { maxFileSize: "32MB" } })
+    .onUploadComplete(async ({ file: _file }) => {
+      
       // You can log or process the file here
     }),
 } satisfies FileRouter;

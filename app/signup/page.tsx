@@ -31,13 +31,13 @@ export default function SignupPage() {
 
       localStorage.setItem('token', data.token);
       router.push('/upload');
-    } catch (err) {
+    } catch (_err) {
       setErrorMsg('Something went wrong. Please try again.');
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+    <div className="min-h-screen flex text-black items-center justify-center bg-gray-50 px-4">
       <form
         onSubmit={handleSubmit}
         className="bg-white shadow-md rounded-xl p-8 w-full max-w-md space-y-6"
